@@ -1,0 +1,6 @@
+venv/
+ecommerce_api/__pycache__/
+shop/__pycache__/
+store-client/node_modules/
+shop/migrations/
+shop/api/__pycache__/

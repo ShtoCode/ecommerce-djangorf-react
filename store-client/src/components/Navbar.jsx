@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from "react-router-dom";
 import DropdownLinks from './DropdownLinks';
 import { BiSolidSearch } from 'react-icons/bi';
+import axios from 'axios'
 
 
 const Navbar = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+
+  const [categories, setCategories] = useState([])
 
   const handleSearch = async (event) => {
     event.preventDefault();
@@ -17,24 +20,13 @@ const Navbar = () => {
     setIsSidebarOpen(!isSidebarOpen)
   }
 
-  const dropdownLinks = [
-    {
-      title: 'Dropdown Item 1',
-      to: '/dropdown-item-1'
-    },
-    {
-      title: 'Dropdown Item 2',
-      to: '/dropdown-item-2'
-    },
-    {
-      title: 'Dropdown Item 3',
-      to: '/dropdown-item-3'
-    },
-    {
-      title: 'Dropdown Item 4',
-      to: '/dropdown-item-4'
-    },
-  ];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const response = await axios.get('http://localhost:8000/api/category/all')
+      setCategories(response.data)
+    }
+    fetchCategories()
+  })
 
   return (
     <nav className="flex justify-between items-center bg-[#004943] pb-2 pt-2 mt-0">
@@ -62,13 +54,17 @@ const Navbar = () => {
           >
             Inicio
           </Link>
-          <DropdownLinks title="Productos" links={dropdownLinks} />
-          <Link
-            to="/ofertas"
-            className="rounded-lg px-3 py-2 text-white font-medium hover:bg-secondary-rgb hover:text-white transition duration-1000"
-          >
-            Ofertas
-          </Link>
+          <DropdownLinks title="Productos" links={[
+            {
+              title: 'Todos los Productos',
+              to: '/productos'
+            },
+            ...categories.map((category) => ({
+              title: category.name,
+              to: '/productos/' + category.name,
+            }))
+
+          ]} />
           <Link
             to="/contacto"
             className="rounded-lg px-3 py-2 text-white font-medium hover:bg-secondary-rgb hover:text-white transition duration-1000"

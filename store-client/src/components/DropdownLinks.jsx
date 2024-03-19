@@ -21,7 +21,7 @@ const DropdownLinks = ({ title, links }) => {
   };
 
   return (
-    <li className="list-none"
+    <li className="list-none "
       onMouseLeave={handleMenuMouseLeave}
     >
       <button
@@ -53,7 +53,7 @@ const DropdownLinks = ({ title, links }) => {
       </button>
       {
         isOpen && (
-          <ul className="absolute z-10 mt-2 space-y-2 bg-white rounded-md shadow-lg"
+          <ul className="absolute z-10 mt-2 space-y-2 bg-primary-rgb rounded-md shadow-lg"
             onMouseEnter={handleMenuMouseEnter}
             onMouseLeave={handleMenuMouseLeave}
           >
@@ -61,7 +61,7 @@ const DropdownLinks = ({ title, links }) => {
               <li key={link.title}>
                 <Link
                   to={link.to}
-                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  className="block px-4 py-2 text-gray-800 hover:bg-secondary-rgb"
                 >
                   {link.title}
                 </Link>

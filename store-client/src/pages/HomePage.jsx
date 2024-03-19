@@ -1,11 +1,13 @@
 import React from 'react'
 import '../index.css'
-import HeaderHome from '../components/HeaderHome/HeaderHome'
+import HeaderHome from '../components/home/header/HeaderHome'
+import TopSells from '../components/home/TopSells'
 
 const HomePage = () => {
   return (
-    <div className='bg-orange-50 h-screen'>
+    <div className='h-screen'>
       <HeaderHome />
+      <TopSells />
     </div>
   )
 }
